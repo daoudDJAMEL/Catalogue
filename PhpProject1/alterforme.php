@@ -1,5 +1,5 @@
 <?php
-include('con2.php');
+include('conn.php');
 /* 
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
@@ -113,7 +113,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
      
      $domain =@$_POST['domain'];
      $domain2 =@$_POST['domain2'];
-     
+     echo $domain;
      $desc =@$_POST['desc'];
      $desc2 =@$_POST['desc2'];
      
@@ -153,6 +153,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
 	$conn->setFetchMode(PDO::FETCH_CLASS, 'Titre');
 	$res = $conn->fetch();
       
+        echo $res;
         
         $conn2 = $pdo->query("SELECT * from titre WHERE Titre ='".(string)$titre2."'");				
 	$conn2->setFetchMode(PDO::FETCH_CLASS, 'Titre');
@@ -161,6 +162,8 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         $connd = $pdo->query("SELECT * from domain WHERE Domain ='".$domain."'");				
 	$connd->setFetchMode(PDO::FETCH_CLASS, 'Domain');
 	$resd = $connd->fetch();
+        echo "domaine";
+        echo $resd;
         
          $connd2 = $pdo->query("SELECT * from domain WHERE Domain ='".$domain2."'");				
 	$connd2->setFetchMode(PDO::FETCH_CLASS, 'Domain');
@@ -169,6 +172,8 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         $connc = $pdo->query("SELECT * from cepage WHERE cepage ='".$cepage."'");				
 	$connc->setFetchMode(PDO::FETCH_CLASS, 'Cepage');
 	$resc = $connc->fetch();
+        echo $resc;
+        
         
         $connc2 = $pdo->query("SELECT * from cepage WHERE cepage ='".$cepage2."'");				
 	$connc2->setFetchMode(PDO::FETCH_CLASS, 'Cepage');
@@ -178,15 +183,19 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
          $connm = $pdo->query("SELECT * from Millesime WHERE Mill ='".$millesime."'");				
 	$connm->setFetchMode(PDO::FETCH_CLASS, 'Millesime');
 	$resm = $connm->fetch();
+        echo $resm;
+        
         
         $connm2 = $pdo->query("SELECT * from Millesime WHERE Mill ='".$millesime2."'");				
 	$connm2->setFetchMode(PDO::FETCH_CLASS, 'Millesime');
 	$resm2 = $connm2->fetch();
-        
+       
         
          $connf = $pdo->query("SELECT * from format WHERE format ='".$format."'");				
 	$connf->setFetchMode(PDO::FETCH_CLASS, 'Format');
 	$resf = $connf->fetch();
+        echo $resf;
+        
         
         $connf2 = $pdo->query("SELECT * from format WHERE format ='".$format2."'");				
 	$connf2->setFetchMode(PDO::FETCH_CLASS, 'Format');
@@ -195,6 +204,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
          $connde = $pdo->query("SELECT * from produit WHERE Descp ='".$desc."'");				
 	$connde->setFetchMode(PDO::FETCH_CLASS, 'Produit');
 	$resde = $connde->fetch();
+        echo $resde;
         
          $connde2 = $pdo->query("SELECT * from produit WHERE Descp ='".$desc2."'");				
 	$connde2->setFetchMode(PDO::FETCH_CLASS, 'Produit');
@@ -203,6 +213,8 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         $connp = $pdo->query("SELECT * from prix WHERE prix ='".(double)$prix."'");				
 	$connp->setFetchMode(PDO::FETCH_CLASS, 'Prix');
 	$resp = $connp->fetch();
+        echo $resp;
+        
         
          $connp2 = $pdo->query("SELECT * from prix WHERE prix ='".(double)$prix2."'");				
 	$connp2->setFetchMode(PDO::FETCH_CLASS, 'Prix');
@@ -221,9 +233,9 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         $conrel = $pdo->query("SELECT * from relation WHERE `Id_titre` = '".$res->Id_titre."'and  `Id_domain` ='".$resd->Id_domain."' and `Id_produit` = '".$resde->Id_produit."' and  `Id_mill` = '".$resm->Id_mill."' and   `Id_cep` = '".$resc->Id_cep."' and Id_format= '".$resf->Id_format."'  and nbr_row_table = '".$n."' ");				
 	$conrel->setFetchMode(PDO::FETCH_CLASS, 'Relation');
 	$resre = $conrel->fetch();
-        //echo $resre;
+        echo $resre;
          
-       
+       echo 'resltass';
          
        /////////////////////////////////////////////////////////////////////////////////////////////////::
         
@@ -363,14 +375,19 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
     
         
         
+    } else {
+        echo 'linge non trouver';
     }
+    
+    
+    
     }
  
 
  
         
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      /*
+     
         if(isset($_POST['add'])){ 
 
             
@@ -461,19 +478,19 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         
         
         
-        echo "id titre";
+        echo "\n id titre ";
          echo $res->Id_titre;
-         echo "id domain";
+         echo "\n id domain";
          echo $resd->Id_domain;
-         echo "id desc";
+         echo "\n id desc";
          echo $resde->Id_produit;
-         echo "id cep";
+         echo "\n id cep";
          echo $resc->Id_cep;
-         echo "id mill";
+         echo " \n id mill";
          echo $resm->Id_mill;
-         echo "id prix";
+         echo " \n id prix";
          echo $resp->Id_prix;
-          echo "id nombre";
+          echo "\n id nombre \n";
          echo $resn->nb_row;
          
        
@@ -486,9 +503,9 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         echo $resre;
             
          
-          if ($resre === false and $prix != "" and $format != "" and $millesime != "" and $desc != "" and $cepage != "" and $domain != ""and $titre != "" ){
+          if ($resre === false and $prix != "" and $format != "" and $millesime != "" and $desc != ""  and $domain != ""and $titre != "" ){
         
-	 //$conn = $pdo->query("INSERT INTO relation (Id_titre,Id_domain,Id_produit,Id_mill,Id_cep,Id_format,Id_prix,nbr_row_table)  (Id_titre,Id_domain,$resde->Id_produit,Id_mill,Id_cep,Id_format,Id_prix,nbr_row_table)VALUES ('".$res->Id_titre."','".$resd->Id_domain."','".$resde->Id_produit."','".$resm->Id_mill."','".$resc->Id_cepage."','".$resf->Id_format."','".$resp->Id_prix."','".$n."' ) ");
+	  $conn = $pdo->query("INSERT INTO relation (Id_titre,Id_domain,Id_produit,Id_mill,Id_cep,Id_format,Id_prix,nbr_row_table)  VALUES ('".$res->Id_titre."','".$resd->Id_domain."','".$resde->Id_produit."','".$resm->Id_mill."','".$resc->Id_cepage."','".$resf->Id_format."','".$resp->Id_prix."','".$n."' ) ");
 
 	        echo " add linge";
         }else{
@@ -499,7 +516,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
      
     }
     
-    */
+    
           
    
   
