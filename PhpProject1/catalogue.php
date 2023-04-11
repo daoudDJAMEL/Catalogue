@@ -1,6 +1,6 @@
 <?php
 //include('sommaire.php');
-include('conn.php');
+include('conn2.php');
 ?>
 <html>
   <head>
