@@ -158,11 +158,13 @@ table tr:nth-child(even) {
                 } else {
                          array_push($stack7,htmlspecialchars($resd->Domain));
                }
-                     if ($rest == false) {
+                if ($rest == false) {
                        array_push($stack6," ");
                     } else {
                          array_push($stack6,htmlspecialchars($rest->Titre));
                     }
+                    
+                    
                 if ($resint == false) {
                       array_push($stack8," ");
                  } else {
@@ -259,8 +261,8 @@ table tr:nth-child(even) {
 
               
                   for(  $y = 1;  $y <=  $nrow;   $y++) {
-                           echo "domaine =";
-                      echo $id_dom[$y];
+                          // echo "domaine =";
+                      //echo $id_dom[$y];
                        echo "\n";
                         echo "\n";
                          echo "\n";
@@ -506,7 +508,9 @@ if($y == $nrow){
        $t = count($stack5);
        $nbr_linge = count($stack5);
 }
-
+//echo " nombre de linge ";
+//echo $nbr_linge;
+//echo "::::::";
 
 
 
@@ -718,7 +722,7 @@ if ($id_dom[$y] == 25){
 
 <!-- //////////////////////////////////////////////////////:::::::::::-->
 <?php
- if( $id_dom[$y] == 23 || $id_dom[$y] == 26 || $id_dom[$y] ==1010 ){
+ if( $nbr_linge > 45 ||$id_dom[$y] == 23 || $id_dom[$y] == 26 || $id_dom[$y] ==1010 ){
     $index = $y + 300;
     $one = 1;
     $numbre_page = $numbre_page + 1;
@@ -819,7 +823,8 @@ if ($id_dom[$y] == 25){
 
 <!-- //////////////////////////////////////////////////////:::::::::::-->
 <?php
- if( $id_dom[$y] ==1010 ){
+if( $nbr_linge > 60 && $nbr_linge <= 80 ){
+ //if( $id_dom[$y] == 1010 ){
     $index = $y + 400;
     $one = 1;
     $numbre_page = $numbre_page + 1;
@@ -920,7 +925,8 @@ if ($id_dom[$y] == 25){
 
 <!-- //////////////////////////////////////////////////////:::::::::::-->
 <?php
- if( $id_dom[$y] ==1010 ){
+if( $nbr_linge > 80 && $nbr_linge <= 100 ){
+ //if( $id_dom[$y] ==1010 ){
     $index = $y + 500;
     $one = 1;
     $numbre_page = $numbre_page + 1;
@@ -1021,8 +1027,112 @@ if ($id_dom[$y] == 25){
 
 <!-- //////////////////////////////////////////////////////:::::::::::-->
 <?php
- if( $id_dom[$y] ==1010 ){
+if( $nbr_linge > 100 && $nbr_linge <= 120 ){
+ //if( $id_dom[$y] ==1010 ){
     $index = $y + 600;
+    $one = 1;
+    $numbre_page = $numbre_page + 1;
+ ?>
+   <script>
+           var clonet = $("#table-contente"+ <?php echo json_encode($one); ?>).clone();
+           clonet.attr("id", "table-content-extra"+ <?php echo json_encode($index); ?>);
+
+        clonet.find("#table-dive1").attr("id","table-div-extra" + <?php echo json_encode($index); ?>);
+
+
+
+        clonet.find("#exemple" ).attr("id","new-table" + <?php echo json_encode($index);?> );
+
+        clonet.find("#elemnt-tablee1").attr("id","elemnt-table-extra" + <?php echo json_encode($index); ?>);
+        clonet.find("#table-cole1").attr("id","table-col-extra" + <?php echo json_encode($index); ?>);
+
+
+     var wrapper  = document.createElement("div");
+     wrapper.setAttribute('class', 'wrapper');
+     wrapper.setAttribute('id', 'page-extra'+ <?php echo json_encode($index); ?>);
+
+      catalogue = document.getElementById("catalogue");
+      page = document.getElementById("page" + <?php echo json_encode($y+1); ?> );
+      //page.appendChild(div);
+       catalogue.insertBefore(wrapper, page);
+
+
+        //var table_content  = document.createElement("div");
+        //table_content.setAttribute('id', 'table-content' );
+
+       // var table  = document.createElement("table");
+        //wrapper.setAttribute('id', 'table-content' );
+
+      clonet.appendTo("#page-extra"+ <?php echo json_encode($index); ?>);
+      //clonet.appendTo("#");
+      //div.appendTo(page);
+
+   </script>
+
+
+
+   <script>
+
+     var col ;
+    col= document.getElementById("table-col-extra" + <?php echo json_encode($index); ?>  );
+
+
+      var theeec = document.createElement("th");
+
+      <?php if ($nbr_col>=2) {?>
+      var theee2c = document.createElement("th");
+      <?php  } if ($nbr_col>=3) {?>
+      var theee3c = document.createElement("th");
+       <?php  } if ($nbr_col>=4) {?>
+      var theee4c = document.createElement("th");
+        <?php  } if ($nbr_col>=5) {?>
+      var theee5c = document.createElement("th");
+         <?php  } ?>
+
+
+      <?php if ($nbr_col>=2) {?>
+      theeec.innerHTML =<?php echo json_encode($prix1); ?>;
+       <?php  } if ($nbr_col==1) {?>
+       theeec.innerHTML =<?php echo json_encode($prix);} ?>;
+
+
+       <?php if ($nbr_col>=2) {?>
+      theee2c.innerHTML =<?php echo json_encode($prix2); ?>;
+       <?php  } if ($nbr_col>=3) {?>
+      theee3c.innerHTML =<?php echo json_encode($prix3); ?>;
+       <?php  } if ($nbr_col>=4) {?>
+      theee4c.innerHTML =<?php echo json_encode($prix4); ?>;
+        <?php  } if ($nbr_col>=5) {?>
+      theee5c.innerHTML =<?php echo json_encode($prix5); ?>;
+        <?php  } ?>
+
+       col.appendChild(theeec);
+
+
+        <?php if ($nbr_col>=2) {?>
+       col.appendChild(theee2c);
+         <?php  } if ($nbr_col>=3) {?>
+       col.appendChild(theee3c);
+         <?php  } if ($nbr_col>=4) {?>
+       col.appendChild(theee4c);
+         <?php  } if ($nbr_col>=5) {?>
+       col.appendChild(theee5c);
+        <?php  } ?>
+
+
+
+    </script>
+
+
+
+ <?php } ?>
+
+    
+    
+    <!-- //////////////////////////////////////////////////////:::::::::::-->
+<?php
+ if( $nbr_linge > 120 ){
+    $index = $y + 700;
     $one = 1;
     $numbre_page = $numbre_page + 1;
  ?>
@@ -1122,6 +1232,8 @@ if ($id_dom[$y] == 25){
 
 
 
+
+
 <!--parti replir la table -->
 
 <script>
@@ -1190,15 +1302,15 @@ $nbr_linge = 0;
  // remplir la table //////////////////////////////////////////////////:
 for($x = 0; $x <= $t; $x++) {
     $nbr_linge = $nbr_linge +1;
-
-if($id_dom[$y] ==15 || $id_dom[$y] == 16   || $id_dom[$y] == 17  ){
+if($id_dom[$y] == 15 || $id_dom[$y] == 16   || $id_dom[$y] == 17  ){
     $taille_tab = 6;
     }elseif( $id_dom[$y] == 23  ){
     $taille_tab = 9;
-    } elseif ($id_dom[$y] == 26){
-         $taille_tab = 10;
-    } elseif ($id_dom[$y]== 1009){
+    }elseif ($id_dom[$y]== 1009){
          $taille_tab = 8;
+    } 
+     elseif ($id_dom[$y] == 26){
+         $taille_tab = 10;
     } 
     else
     {
@@ -1206,7 +1318,6 @@ if($id_dom[$y] ==15 || $id_dom[$y] == 16   || $id_dom[$y] == 17  ){
     }
   
 if($nbr_linge <= $taille_tab ){
-       
 
 ?>
 
@@ -1304,14 +1415,15 @@ if($nbr_linge <= $taille_tab ){
 }
 
 
-    if( $id_dom[$y] == 23 ){
-       $limit2 = 27;
-
-    }elseif( $id_dom[$y] == 16 ){
+   if( $id_dom[$y] == 16 ){
        $limit2 = 20;
 
     }elseif ($id_dom[$y] ==26) {
          $limit2 = 26;
+    }elseif ($id_dom[$y] == 23) {
+         $limit2 = 27;
+    
+    
     }elseif ($id_dom[$y] == 1002) {
          $limit2 = 27;
     
@@ -1428,23 +1540,24 @@ if($nbr_linge > $taille_tab  && $nbr_linge <= $limit2){
     <!--     ////////////////////////////////////////////////////////////////////-->
 
 <?php
-if( $id_dom[$y] == 23 ){
-       $limit3 = 45;
-    }
-    elseif( $id_dom[$y] == 16 ){
-       $limit3 = 28;
 
-    }elseif( $id_dom[$y] == 26 ){
-       $limit3 = 36;
-    } else if($id_dom[$y] == 1002) {
-         $limit3 = 44;
+
+    if( $id_dom[$y] == 16){
+        $limit3 = 28;
     }
-    else if($id_dom[$y] == 1009) {
+    elseif( $id_dom[$y] == 26 ){
+       $limit3 = 36;
+    }else if($id_dom[$y] == 1009) {
          $limit3 = 42;
-    }else if($id_dom[$y] == 1010) {
-         $limit3 = 44;
-    }else {
-         $limit3 = 33;
+    }
+    elseif( $id_dom[$y] == 1002 ||$id_dom[$y] == 1010 ){
+       $limit3 = 44;
+       
+    } else if($id_dom[$y] == 23) {
+         $limit3 = 45;
+    }
+    else {
+         $limit3 = 45;
     }
    
    
@@ -1568,15 +1681,14 @@ if($nbr_linge > $limit2  && $nbr_linge <= $limit3){
  
    
 
-     if( $id_dom[$y] == 23 ){
+     if( $id_dom[$y] == 16 ){
+       $limit4 = 45;
+    }
+    else if( $id_dom[$y] == 23  ){
        $limit4 = 60;
 
-    }
-    else if( $id_dom[$y] == 16 ){
-       $limit4 = 45;
-
     }else{
-       $limit4 = 61;
+       $limit4 = 60;
     }
     
 
@@ -1692,7 +1804,7 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
 
 
     
-    if( $nbr_linge > $limit4 && $nbr_linge <=80 ){
+    if( $nbr_linge > $limit4 && $nbr_linge <= 80 ){
 
     $index = $y + 400;
 
@@ -1799,7 +1911,7 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
 
     
     
-    if( $nbr_linge > 80 && $nbr_linge <=100 ){
+    if( $nbr_linge > 80 && $nbr_linge <= 100 ){
 
     $index = $y + 500;
 
@@ -1908,7 +2020,7 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
  
     
     
-    if( $nbr_linge > 100 && $nbr_linge <=120 ){
+    if( $nbr_linge > 100 && $nbr_linge <= 120 ){
 
     $index = $y + 600;
 
