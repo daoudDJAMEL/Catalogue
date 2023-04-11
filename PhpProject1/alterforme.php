@@ -1,5 +1,5 @@
 <?php
-include('conn.php');
+include('conn2.php');
 /* 
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
@@ -98,6 +98,11 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
 <p> <button class="w3-btn w3-block w3-black w3-large w3-hover-red" type="submit" name="add">add data</button></p>
 <br><br><br><br><br>
 <p> <button class="w3-btn w3-block w3-black w3-large w3-hover-blue" type="submit" name="alter">modify data</button></p>
+
+<br><br><br><br><br>
+<p> <button class="w3-btn w3-block w3-black w3-large w3-hover-white" type="submit" name="delete">delete data</button></p>
+
+
 </div>
 
 </form>
@@ -113,7 +118,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
      
      $domain =@$_POST['domain'];
      $domain2 =@$_POST['domain2'];
-     echo $domain;
+     
      $desc =@$_POST['desc'];
      $desc2 =@$_POST['desc2'];
      
@@ -153,7 +158,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
 	$conn->setFetchMode(PDO::FETCH_CLASS, 'Titre');
 	$res = $conn->fetch();
       
-        echo $res;
+       // echo $res;
         
         $conn2 = $pdo->query("SELECT * from titre WHERE Titre ='".(string)$titre2."'");				
 	$conn2->setFetchMode(PDO::FETCH_CLASS, 'Titre');
@@ -162,8 +167,8 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         $connd = $pdo->query("SELECT * from domain WHERE Domain ='".$domain."'");				
 	$connd->setFetchMode(PDO::FETCH_CLASS, 'Domain');
 	$resd = $connd->fetch();
-        echo "domaine";
-        echo $resd;
+        //echo "domaine";
+       // echo $resd;
         
          $connd2 = $pdo->query("SELECT * from domain WHERE Domain ='".$domain2."'");				
 	$connd2->setFetchMode(PDO::FETCH_CLASS, 'Domain');
@@ -172,7 +177,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         $connc = $pdo->query("SELECT * from cepage WHERE cepage ='".$cepage."'");				
 	$connc->setFetchMode(PDO::FETCH_CLASS, 'Cepage');
 	$resc = $connc->fetch();
-        echo $resc;
+        //echo $resc;
         
         
         $connc2 = $pdo->query("SELECT * from cepage WHERE cepage ='".$cepage2."'");				
@@ -183,7 +188,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
          $connm = $pdo->query("SELECT * from Millesime WHERE Mill ='".$millesime."'");				
 	$connm->setFetchMode(PDO::FETCH_CLASS, 'Millesime');
 	$resm = $connm->fetch();
-        echo $resm;
+       // echo $resm;
         
         
         $connm2 = $pdo->query("SELECT * from Millesime WHERE Mill ='".$millesime2."'");				
@@ -194,7 +199,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
          $connf = $pdo->query("SELECT * from format WHERE format ='".$format."'");				
 	$connf->setFetchMode(PDO::FETCH_CLASS, 'Format');
 	$resf = $connf->fetch();
-        echo $resf;
+       // echo $resf;
         
         
         $connf2 = $pdo->query("SELECT * from format WHERE format ='".$format2."'");				
@@ -204,7 +209,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
          $connde = $pdo->query("SELECT * from produit WHERE Descp ='".$desc."'");				
 	$connde->setFetchMode(PDO::FETCH_CLASS, 'Produit');
 	$resde = $connde->fetch();
-        echo $resde;
+        //echo $resde;
         
          $connde2 = $pdo->query("SELECT * from produit WHERE Descp ='".$desc2."'");				
 	$connde2->setFetchMode(PDO::FETCH_CLASS, 'Produit');
@@ -213,7 +218,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         $connp = $pdo->query("SELECT * from prix WHERE prix ='".(double)$prix."'");				
 	$connp->setFetchMode(PDO::FETCH_CLASS, 'Prix');
 	$resp = $connp->fetch();
-        echo $resp;
+        //echo $resp;
         
         
          $connp2 = $pdo->query("SELECT * from prix WHERE prix ='".(double)$prix2."'");				
@@ -233,12 +238,19 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
         $conrel = $pdo->query("SELECT * from relation WHERE `Id_titre` = '".$res->Id_titre."'and  `Id_domain` ='".$resd->Id_domain."' and `Id_produit` = '".$resde->Id_produit."' and  `Id_mill` = '".$resm->Id_mill."' and   `Id_cep` = '".$resc->Id_cep."' and Id_format= '".$resf->Id_format."'  and nbr_row_table = '".$n."' ");				
 	$conrel->setFetchMode(PDO::FETCH_CLASS, 'Relation');
 	$resre = $conrel->fetch();
-        echo $resre;
+       // echo $resre;
          
-       echo 'resltass';
+       //echo 'resltass';
          
        /////////////////////////////////////////////////////////////////////////////////////////////////::
         
+       
+       if(isset($_POST['delete'])){ 
+       if($resre == true){
+           $conn = $pdo->query("DELETE from  relation where ID = '".$resre->ID."' ");
+       }}
+       
+       
     if(isset($_POST['alter'])){ 
         if($resre == true){
       
@@ -477,7 +489,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
          
         
         
-        
+        /*
         echo "\n id titre ";
          echo $res->Id_titre;
          echo "\n id domain";
@@ -493,7 +505,7 @@ class="w3-btn w3-right w3-large w3-hover-red w3-clear">X</button>
           echo "\n id nombre \n";
          echo $resn->nb_row;
          
-       
+       */
          
      
          
