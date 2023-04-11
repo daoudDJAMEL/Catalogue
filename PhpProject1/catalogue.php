@@ -1,6 +1,6 @@
 <?php
 //include('sommaire.php');
-include('con2.php');
+include('conn.php');
 ?>
 <html>
   <head>
@@ -118,7 +118,7 @@ table tr:nth-child(even) {
                    $te3 = array();
 
                  $img =array("","Domaine de Marzilly.png","Domaine Flûteau.png","Domaine Roland Schmitt.png","Domaine du Cassard.webp",
-                     "Domaine Peyrat-Fourthon.png","Château d’Arche Sauternes.png","Château Bonnange.png","Domaine Rollan de by.png",
+                     "Domaine Peyrat-Fourthon.png","Château d’Arche.png","Château Bonnange.png","Domaine Rollan de by.png",
                     "Jean Paul et Benoit Droin.jpg","Au pied du mont Chauve.png", "Domaine Levert -Barault.png","Domaine Voarick.jpg","Château de davenay.png","Domaine Castellu di Baricci.jfif",
                      "Clos Capitoro.jfif","Domaine Sant Armettu.png","Domaine Gentile.png","domainePieretti.jpg","Domaine de Torraccia.jpg",
                      "Château Saint-Maur.png","Château La Calisse.png", "Domaine Gavotty.png","Domaine La suffrene.jpg",
@@ -271,52 +271,52 @@ table tr:nth-child(even) {
                 
                     
                     array_push($test,"NUll");
-                  if ($id_domain[$y] ==13){
+                  if ($id_dom[$y] == 13){
                    $prix1 ="36 cols prix € H.T";
                    $prix2 ="60 cols prix € H.T";
                    $prix3 ="120 cols prix € H.T";
                    $prix4 ="300 cols prix € H.T";
-                }else if($id_domain[$y] ==14){
+                }else if($id_dom[$y] ==14){
                      $prix1 ="48 cols prix € H.T";
                    $prix2 ="72 cols prix € H.T";
                    $prix3 ="120 cols prix € H.T";
-                }else if($id_domain[$y] ==15){
+                }else if($id_dom[$y] ==15){
                      $prix1 ="6 cols prix € H.T";
                    $prix2 ="12 cols prix € H.T";
                    $prix3 ="18 a 36 cols prix € H.T";
                    $prix4 ="42 a 72 cols prix € H.T";
                    $prix5 ="78 a 120 cols prix € H.T";
-                }else if($id_domain[$y] == 16){
+                }else if($id_dom[$y] == 16){
                      $prix1 ="48 cols prix € H.T";
                    $prix2 ="60 cols prix € H.T";
                    $prix3 ="90 cols prix € H.T";
                    $prix4 ="120 et + cols prix € H.T";                   
                    $prix5 ="prix de vent conseillé TTC";
 
-                }else if($id_domain[$y] ==17){
+                }else if($id_dom[$y] ==17){
                      $prix1 ="PRIX € Franco 48cols";
                    $prix2 ="PRIX € Franco 72cols";
                    $prix3 ="PRIX € Franco 120cols";
                    $prix4 ="PRIX € Franco 300cols";
-                }else if($id_domain[$y] ==18){
+                }else if($id_dom[$y] ==18){
                      $prix1 ="prix € H.T de 6 a 35 cols";
                    $prix2 ="prix € H.T de 36 a 59 cols";
                    $prix3 ="prix € H.T de 60 a 119 cols";
                    $prix4 ="prix € H.T de 120 a 299 cols";
                    
-                }else if($id_domain[$y] ==19){
+                }else if($id_dom[$y] ==19){
                      $prix1 ="PRIX € Franco 24cols";
                    $prix2 ="PRIX € Franco 60cols";
             
-                }else if($id_domain[$y] ==24){
+                }else if($id_dom[$y] ==24){
                      $prix1 ="PRIX € Franco 12cols";
                    $prix2 =" PRIX € Franco 36cols";
                    $prix3 =" PRIX € Franco 60cols";
-                }else if($id_domain[$y] ==25){
+                }else if($id_dom[$y] ==25){
                      $prix1 ="prix € H.T de 24 a 60 cols";
                    $prix2 ="prix € H.T de 66 a 120 cols";
                    $prix3 ="prix € H.T de +126 cols";
-                }else if($id_domain[$y] ==26){
+                }else if($id_dom[$y] ==26){
                      $prix1 ="6 cols prix € H.T";
                    $prix2 ="12 cols prix € H.T";
                    $prix3 ="24 cols prix € H.T";
@@ -324,7 +324,30 @@ table tr:nth-child(even) {
                 } else if($id_domain[$y] ==77){
                     $prix1 = "prix € H.T";
                     $prix = "prix € H.T";
-                }else {
+                } else if($id_dom[$y] == 1002 || $id_dom[$y] == 1003 || $id_dom[$y] == 1004 ||  $id_dom[$y] == 1005){
+                    $prix1 = "prix € H.T de 24cols";
+                    $prix2 ="prix € H.T de 60cols";
+                }
+                 else if($id_dom[$y] == 1008  ){
+                    $prix1 = "prix € H.T de 36 à 71 blles";
+                    $prix2 ="prix € H.T de de 72 à 119 blles";
+                    $prix3 ="prix € H.T de +120 cols";
+                } else if($id_dom[$y] == 1009  ){
+                    $prix1 = "prix € H.T - 120 bouteilles";
+                    $prix2 ="prix € H.T de  121 à 312 bouteilles";
+                    $prix3 ="prix € H.T  + 312 bouteilles";
+                }
+                else if($id_dom[$y] == 1010  ){
+                    $prix1 = "prix € H.T de 24cols";
+                    $prix2 ="prix € H.T de 60cols";
+                 
+                }else if($id_dom[$y] == 1011  ){
+                    $prix1 = "prix € H.T - 120 bouteilles";
+                    $prix2 ="prix € H.T de  121 à 312 bouteilles";
+                   
+                }
+                
+                else {
                     
                     $prix = "prix € H.T";
                 }
@@ -441,10 +464,11 @@ table tr:nth-child(even) {
     
     
  <?php
+ /*
 if($y == $nrow){
       $numbre_page = $numbre_page + 1;
 }
-
+*/
  if($y != $nrow +1):
             $numbre_page = $numbre_page + 1;
            
@@ -453,6 +477,8 @@ if($y == $nrow){
 
     var clone = $("#page"+ <?php echo json_encode($y); ?>).clone();
         clone.attr("id", "page"+ <?php echo json_encode($suiv); ?>);
+        
+        
         clone.find("#titre"+<?php echo json_encode($y); ?>).attr("id","titre" + <?php echo json_encode($suiv); ?>);
         clone.find("#domain"+<?php echo json_encode($y); ?>).attr("id","domain" + <?php echo json_encode($suiv); ?>);
         clone.find("#image"+<?php echo json_encode($y); ?>).attr("id","image" + <?php echo json_encode($suiv); ?>);
@@ -466,6 +492,7 @@ if($y == $nrow){
         clone.appendTo("#catalogue");
 
    </script>
+   
 <?php endif; ?>
 
  <?php
@@ -490,7 +517,7 @@ if ($id_dom[$y] == 25){
 }
 //echo 'NOMBRE DE LINGE ++';
 //echo $nbr_linge;
- if($nbr_linge > 11 ||$id_dom[$y] == 17  ):
+ if($nbr_linge > 11 || $id_dom[$y] == 17  ):
     $index = $y + 100;
     $one = 1;
     $numbre_page = $numbre_page + 1;
@@ -1101,11 +1128,9 @@ if ($id_dom[$y] == 25){
 
      var col ;
     col= document.getElementById("table-col" + <?php echo json_encode($y); ?>  );
+   var theeec = document.createElement("th");
 
-
-      var theeec = document.createElement("th");
-
-      <?php if ($nbr_col>=2) {?>
+      <?php if ($nbr_col >= 2) {?>
       var theee2c = document.createElement("th");
       <?php  } if ($nbr_col>=3) {?>
       var theee3c = document.createElement("th");
@@ -1116,11 +1141,12 @@ if ($id_dom[$y] == 25){
          <?php  } ?>
 
 
-      <?php if ($nbr_col>=2) {?>
+      <?php if ($nbr_col >= 2) {?>
       theeec.innerHTML =<?php echo json_encode($prix1); ?>;
        <?php  } if ($nbr_col==1) {?>
        theeec.innerHTML =<?php echo json_encode($prix);} ?>;
-      
+
+
        <?php if ($nbr_col>=2) {?>
       theee2c.innerHTML =<?php echo json_encode($prix2); ?>;
        <?php  } if ($nbr_col>=3) {?>
@@ -1132,6 +1158,8 @@ if ($id_dom[$y] == 25){
         <?php  } ?>
 
        col.appendChild(theeec);
+
+
         <?php if ($nbr_col>=2) {?>
        col.appendChild(theee2c);
          <?php  } if ($nbr_col>=3) {?>
