@@ -1,6 +1,6 @@
 <?php
 //include('sommaire.php');
-include('conn2.php');
+include('conn.php');
 ?>
 <html>
   <head>
@@ -128,6 +128,15 @@ table tr:nth-child(even) {
                    "Marielle Michot.jpeg", "Maison Foucher.png", "Domaine Brana.png","Château de Poncié.png",
                      
                     );
+                 
+                 array_push($stack," ");
+                array_push($stack2," ");
+                array_push($stack3," ");
+                array_push($stack4," ");
+                
+                
+                 
+                 
                  array_push($stack7," ");
                 array_push($stack6," ");
                 array_push($stack8," ");
@@ -459,7 +468,21 @@ table tr:nth-child(even) {
 
 
                }
-
+               
+               if ($id_dom[$y] == 1009){
+                  // echo count( $stack);
+                   /*
+                 for($j = 0; $j < count( $stack); $j++) {
+                     echo $stack[$j];
+                 }
+                 /*
+                 for($j = 0; $j < count( $test); $j++) {
+                     echo $test[$j]."\n";
+                     
+                 }
+                 */
+               }
+              
       
 
 ?>
@@ -501,8 +524,8 @@ if($y == $nrow){
 
 
  if($nbr_col>= 2){
-       $t =count($test);
-        $nbr_linge = (integer)($t/$nbr_col);
+       $t = count($test)-1;
+        $nbr_linge = (integer)($t/$nbr_col) ;
      
 }else {
        $t = count($stack5);
@@ -518,6 +541,16 @@ if($y == $nrow){
 if ($id_dom[$y] == 25){
  $nbr_linge = 10;   
  
+}
+
+if ($id_dom[$y] == 1009){
+   
+ //echo $t;
+
+}
+if ($id_dom[$y] == 1002){
+   
+ //echo $t;
 }
 //echo 'NOMBRE DE LINGE ++';
 //echo $nbr_linge;
@@ -722,7 +755,7 @@ if ($id_dom[$y] == 25){
 
 <!-- //////////////////////////////////////////////////////:::::::::::-->
 <?php
- if( $nbr_linge > 45 ||$id_dom[$y] == 23 || $id_dom[$y] == 26 || $id_dom[$y] ==1010 ){
+ if( $nbr_linge > 45 ||$id_dom[$y] == 23 || $id_dom[$y] == 26  || $id_dom[$y] ==1009 || $id_dom[$y] ==1010 ){
     $index = $y + 300;
     $one = 1;
     $numbre_page = $numbre_page + 1;
@@ -1299,8 +1332,11 @@ if( $nbr_linge > 100 && $nbr_linge <= 120 ){
 
 
 $nbr_linge = 0;
- // remplir la table //////////////////////////////////////////////////:
-for($x = 0; $x <= $t; $x++) {
+
+ // remplir la table //////////////////////////////////////////////////:///////////////////////////////////////////////:
+for($x = 1; $x <= $t; $x++) {
+  
+    
     $nbr_linge = $nbr_linge +1;
 if($id_dom[$y] == 15 || $id_dom[$y] == 16   || $id_dom[$y] == 17  ){
     $taille_tab = 6;
@@ -1316,6 +1352,8 @@ if($id_dom[$y] == 15 || $id_dom[$y] == 16   || $id_dom[$y] == 17  ){
     {
          $taille_tab = 11;
     }
+    
+    
   
 if($nbr_linge <= $taille_tab ){
 
@@ -1344,7 +1382,7 @@ if($nbr_linge <= $taille_tab ){
       var theee5 = document.createElement("th");
         <?php  } ?>
  <?php  if($nbr_col>= 2) {
-                 $n = $x +$index1 ;
+                 $n = $x + $index1 -1;
                  $m = $x +$index1 ;
                  $m2 =$x +$index2;
                  $m3 =$x +$index3;
@@ -1359,6 +1397,7 @@ if($nbr_linge <= $taille_tab ){
                   $m5 =$x;
 
                 }
+                
           ?>
 
       thh.innerHTML =<?php echo json_encode($stack[$n]); ?>;
@@ -1422,9 +1461,11 @@ if($nbr_linge <= $taille_tab ){
          $limit2 = 26;
     }elseif ($id_dom[$y] == 23) {
          $limit2 = 27;
+    }elseif ($id_dom[$y] == 1009) {
+         $limit2 = 20;
     
     
-    }elseif ($id_dom[$y] == 1002) {
+    }elseif ($id_dom[$y] == 1002 ) {
          $limit2 = 27;
     
     }else{
@@ -1548,7 +1589,7 @@ if($nbr_linge > $taille_tab  && $nbr_linge <= $limit2){
     elseif( $id_dom[$y] == 26 ){
        $limit3 = 36;
     }else if($id_dom[$y] == 1009) {
-         $limit3 = 42;
+         $limit3 = 37;
     }
     elseif( $id_dom[$y] == 1002 ||$id_dom[$y] == 1010 ){
        $limit3 = 44;
@@ -1687,14 +1728,23 @@ if($nbr_linge > $limit2  && $nbr_linge <= $limit3){
     else if( $id_dom[$y] == 23  ){
        $limit4 = 60;
 
+    }else if( $id_dom[$y] == 1009  ){
+       $limit4 = 44;
+
     }else{
-       $limit4 = 60;
+       $limit4 = 70;
     }
     
-
+ if ( $id_dom[$y] == 1009){
+            //echo $index;
+           // echo $stack[$n];
+            // echo $stack[$n]; 
+            //echo $limit4;
+            //echo 'l3=';
+            //echo $limit3;
+        }
     
 if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
-
     $index = $y + 300;
 
 ?>
@@ -1724,12 +1774,16 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
       var th55 = document.createElement("th");
         <?php  } ?>
  <?php  if($nbr_col>=2) {
-                 $n = $x +$index1-1;
+                 $n = $x +$index1- 1;
                  $m =$x +$index1;
                  $m2 =$x +$index2;
                  $m3 =$x +$index3;
                  $m4 =$x +$index4;
-                  $m5 =$x +$index5;}
+                  $m5 =$x +$index5;
+                  
+                 
+                  
+ }
            else { $n =$x;
                 $m =$x;
                 $m2 =$x ;
@@ -1739,10 +1793,11 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
 
                 }
           ?>
-      ele.innerHTML =<?php echo json_encode($stack[$n]); ?>;
+      ele.innerHTML =<?php echo json_encode($stack[$n]);?>;
       th2.innerHTML =<?php echo json_encode($stack2[$n]); ?>;
       th3.innerHTML =<?php echo json_encode( $stack3[$n]); ?>;
       th4.innerHTML =<?php echo json_encode( $stack4[$n] ); ?>;
+      
       th5.innerHTML =<?php if($nbr_col>=2){  echo json_encode($test[$m]);
                              }  else{echo json_encode($stack5[$n]);} ?>;
 
@@ -1778,11 +1833,35 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
 
     </script>
 <?php
+
+   
+        
        $index1  = $index0  + $index1 -1;
       $index2  = $index0 +$index2 -1;
       $index3  = $index0 + $index3 -1;
       $index4  = $index0 + $index4 -1;
       $index5  = $index0 + $index5 -1;
+      
+           if ( $id_dom[$y] == 1009){
+            //echo $index;
+            //echo $stack[$n];
+            // echo $stack[$n]; 
+            //echo $x;
+        }
+          if ( $id_dom[$y] == 1009){
+            //echo $index;
+           // echo $stack[$n];
+            // 
+              /*
+            echo'n =';        
+            echo $n;
+            echo count($stack);
+           echo $stack[$n];
+          echo $test[$m];
+            //echo $nbr_linge;
+               * */
+               
+        }
 
      }
 
@@ -2168,6 +2247,7 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
                   $check1 = 0;
                   $check2 = 0;
                   $check3 =  0;
+                                  
                   $test = array();
                   
                   //echo "nombre de domaine " .$y."=";
@@ -2197,7 +2277,11 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
      $conn = $pdo->query("UPDATE page set npage = '".$n_page[$x]."' WHERE Id_domain = '".$id_dom[$x]."'  ");
 
                  }
+                 
+
                   
+                 
+                 
                   
                   
                  
