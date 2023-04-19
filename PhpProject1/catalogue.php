@@ -70,12 +70,15 @@ table tr:nth-child(even) {
                 }
                 $nrowt =$nrowt +1; 
                 $nrow =0;
+                
+                
+                
                 for(  $y = 1;  $y < $nrowt;   $y++) {                 
                 $connd = $pdo->query("SELECT * FROM domain  where Id_titre=  '".$id_titre[$y]."'" );
                 $connd->setFetchMode(PDO::FETCH_CLASS, 'Domain');
 
                
-                    while ($resd = $connd->fetch()){
+                 while ($resd = $connd->fetch()){
                    
                      array_push($id_dom,$resd->Id_domain);
                     
@@ -88,8 +91,8 @@ table tr:nth-child(even) {
                 }
 
                 $prix ="prix  € H.T";
-                 $nbr_prix = array();
-                  array_push($nbr_prix," ");
+                $nbr_prix = array();
+                array_push($nbr_prix," ");
                 $conntr = $pdo->query("SELECT * FROM domain " );
                 $conntr->setFetchMode(PDO::FETCH_CLASS, 'Domain');
                 $id_domain =array();
@@ -111,11 +114,16 @@ table tr:nth-child(even) {
                   $stack6 = array();
                   $stack7 = array();
                   $stack8 = array();
+                  
+                  
                    $test = array();
                    $img =array();
                    $te1 = array();
                    $te2 = array();
                    $te3 = array();
+                   
+                   
+                
 
                  $img =array("","Domaine de Marzilly.png","Domaine Flûteau.png","Domaine Roland Schmitt.png","Domaine du Cassard.webp",
                      "Domaine Peyrat-Fourthon.png","Château d’Arche.png","Château Bonnange.png","Domaine Rollan de by.png",
@@ -123,26 +131,30 @@ table tr:nth-child(even) {
                      "Clos Capitoro.jfif","Domaine Sant Armettu.png","Domaine Gentile.png","domainePieretti.jpg","Domaine de Torraccia.jpg",
                      "Château Saint-Maur.png","Château La Calisse.png", "Domaine Gavotty.png","Domaine La suffrene.jpg",
                      "Grandes Serres.png","Domaine Saint Patrice.png","Domaine Orénia.png",
-                     "Domaine La Soumade.png","La Chapelle Hermitage.png","Domaine Denuzière.png",
+                     "Domaine La Soumade.png","Domaine Denuzière.png",
                      "Sauveroy.png","Les Souterrains.jpeg",
                    "Marielle Michot.jpeg", "Maison Foucher.png", "Domaine Brana.png","Château de Poncié.png",
                      
                     );
                  
-                 array_push($stack," ");
+               
+                
+                 
+                    array_push($stack," ");
                 array_push($stack2," ");
                 array_push($stack3," ");
                 array_push($stack4," ");
+                array_push($stack5," ");
                 
-                
-                 
-                 
+                  
                  array_push($stack7," ");
                 array_push($stack6," ");
                 array_push($stack8," ");
 
                 
                  for(  $f = 1;  $f <=  $nrow;   $f++) {
+                     
+                
                      
                 $conn1a = $pdo->query('SELECT * FROM relation where Id_domain ="'.$id_dom[$f].'"');
                 $conn1a->setFetchMode(PDO::FETCH_CLASS, 'Relation');
@@ -258,7 +270,7 @@ table tr:nth-child(even) {
 
 
 
-                $check1 = 0;
+                $check1= 0;
                 $check2 = 0;
                 $check3 =  0;
                 $check4 =  0;
@@ -268,15 +280,6 @@ table tr:nth-child(even) {
                $n_page = array();
                 array_push($n_page,0);
 
-              
-                  for(  $y = 1;  $y <=  $nrow;   $y++) {
-                          // echo "domaine =";
-                      //echo $id_dom[$y];
-                       echo "\n";
-                        echo "\n";
-                         echo "\n";
-                  }
-                  
                // $suiv = $y +1;
             for(  $y = 1;  $y <=  $nrow;   $y++) {
                 
@@ -447,7 +450,7 @@ table tr:nth-child(even) {
 
               if ($nbr_col>=2) {
                     for($j = 0; $j < count($te1); $j++) {
-                        for($v= 1; $v < $nbr_col+1; $v++){
+                        for($v= 1; $v <= $nbr_col; $v++){
                             $c = $pdo->query("SELECT * FROM relation  where Id_produit ='".$te1[$j]."' and Id_mill ='".$te3[$j]."' and Id_format ='".$te2[$j]."'  and nbr_row_table = '".$v."' " );
                             $c->setFetchMode(PDO::FETCH_CLASS, 'relation');
 
@@ -457,7 +460,7 @@ table tr:nth-child(even) {
                         $rr = $cr->fetch();
                         //echo $rr;
                             if($rr == true){
-                           //echo $rr->prix;
+                           
                             $array_push = array_push($test, $rr->prix);
                             }
                             else { array_push($test,' ');}
@@ -465,10 +468,15 @@ table tr:nth-child(even) {
 
                         }
                     }
-
+                    
 
                }
-               
+               if ($id_dom[$y]== 1008){
+                  for($x = 1; $x < count($te1); $x++) {
+                     // echo $test[$x];
+                       //echo $te1[$x];
+                  }
+                  }
                if ($id_dom[$y] == 1009){
                   // echo count( $stack);
                    /*
@@ -494,16 +502,14 @@ if($y == $nrow){
       $numbre_page = $numbre_page + 1;
 }
 */
- if($y != $nrow +1):
+ if($y != $nrow ):
             $numbre_page = $numbre_page + 1;
            
  ?>
  <script>
 
     var clone = $("#page"+ <?php echo json_encode($y); ?>).clone();
-        clone.attr("id", "page"+ <?php echo json_encode($suiv); ?>);
-        
-        
+        clone.attr("id", "page"+ <?php echo json_encode($suiv); ?>);        
         clone.find("#titre"+<?php echo json_encode($y); ?>).attr("id","titre" + <?php echo json_encode($suiv); ?>);
         clone.find("#domain"+<?php echo json_encode($y); ?>).attr("id","domain" + <?php echo json_encode($suiv); ?>);
         clone.find("#image"+<?php echo json_encode($y); ?>).attr("id","image" + <?php echo json_encode($suiv); ?>);
@@ -524,7 +530,7 @@ if($y == $nrow){
 
 
  if($nbr_col>= 2){
-       $t = count($test)-1;
+        $t = count($test)-1;
         $nbr_linge = (integer)($t/$nbr_col) ;
      
 }else {
@@ -543,9 +549,11 @@ if ($id_dom[$y] == 25){
  
 }
 
-if ($id_dom[$y] == 1009){
-   
+if ($id_dom[$y] == 5){
+
  //echo $t;
+ //echo 'nombre de linge';
+ //echo  $nbr_linge;
 
 }
 if ($id_dom[$y] == 1002){
@@ -554,7 +562,7 @@ if ($id_dom[$y] == 1002){
 }
 //echo 'NOMBRE DE LINGE ++';
 //echo $nbr_linge;
- if($nbr_linge > 11 || $id_dom[$y] == 17  ):
+ if($nbr_linge > 12 || $id_dom[$y] == 17  ):
     $index = $y + 100;
     $one = 1;
     $numbre_page = $numbre_page + 1;
@@ -856,7 +864,7 @@ if ($id_dom[$y] == 1002){
 
 <!-- //////////////////////////////////////////////////////:::::::::::-->
 <?php
-if( $nbr_linge > 60 && $nbr_linge <= 80 ){
+if( $nbr_linge > 60  ){
  //if( $id_dom[$y] == 1010 ){
     $index = $y + 400;
     $one = 1;
@@ -958,7 +966,7 @@ if( $nbr_linge > 60 && $nbr_linge <= 80 ){
 
 <!-- //////////////////////////////////////////////////////:::::::::::-->
 <?php
-if( $nbr_linge > 80 && $nbr_linge <= 100 ){
+if( $nbr_linge > 80 ){
  //if( $id_dom[$y] ==1010 ){
     $index = $y + 500;
     $one = 1;
@@ -1060,7 +1068,7 @@ if( $nbr_linge > 80 && $nbr_linge <= 100 ){
 
 <!-- //////////////////////////////////////////////////////:::::::::::-->
 <?php
-if( $nbr_linge > 100 && $nbr_linge <= 120 ){
+if( $nbr_linge > 100 ){
  //if( $id_dom[$y] ==1010 ){
     $index = $y + 600;
     $one = 1;
@@ -1340,7 +1348,7 @@ for($x = 1; $x <= $t; $x++) {
     $nbr_linge = $nbr_linge +1;
 if($id_dom[$y] == 15 || $id_dom[$y] == 16   || $id_dom[$y] == 17  ){
     $taille_tab = 6;
-    }elseif( $id_dom[$y] == 23  ){
+    }elseif( $id_dom[$y] == 23 || $id_dom[$y] == 18 ){
     $taille_tab = 9;
     }elseif ($id_dom[$y]== 1009){
          $taille_tab = 8;
@@ -1365,8 +1373,8 @@ if($nbr_linge <= $taille_tab ){
     el= document.getElementById("elemnt-table" + <?php echo json_encode($y); ?>  );
 
       var e = document.createElement("tr");
+      
       var thh = document.createElement("th");
-
       var the = document.createElement("th");
       var thee = document.createElement("th");
       var theer = document.createElement("th");
@@ -1404,6 +1412,7 @@ if($nbr_linge <= $taille_tab ){
       the.innerHTML =<?php echo json_encode($stack2[$n]); ?>;
       thee.innerHTML =<?php echo json_encode( $stack3[$n]); ?>;
       theer.innerHTML =<?php echo json_encode( $stack4[$n] ); ?>;
+      
       theee.innerHTML =<?php if($nbr_col>=2){
                                 echo json_encode($test[$m]);
                              }else
@@ -1516,13 +1525,18 @@ if($nbr_linge > $taille_tab  && $nbr_linge <= $limit2){
                  $m3 =$x +$index3;
                  $m4 =$x +$index4;
                   $m5 =$x +$index5;}
-           else { $n =$x;
+           else {
+               
+                $n =$x;
                 $m =$x;
                 $m2 =$x ;
-                 $m3 =$x;
-                 $m4 =$x ;
-                 $m5 =$x;
+                $m3 =$x;
+                $m4 =$x ;
+                $m5 =$x;
 
+                 
+                 
+                 
                 }
           ?>
       ele.innerHTML =<?php echo json_encode($stack[$n]); ?>;
@@ -1731,17 +1745,23 @@ if($nbr_linge > $limit2  && $nbr_linge <= $limit3){
     }else if( $id_dom[$y] == 1009  ){
        $limit4 = 44;
 
-    }else{
+    }
+    else if( $id_dom[$y] == 1010  ){
+       $limit4 = 65;
+
+    }
+    else{
        $limit4 = 70;
     }
     
- if ( $id_dom[$y] == 1009){
+ if ( $id_dom[$y] == 1010){
             //echo $index;
            // echo $stack[$n];
             // echo $stack[$n]; 
             //echo $limit4;
             //echo 'l3=';
             //echo $limit3;
+     //echo $nbr_linge;
         }
     
 if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
@@ -1779,7 +1799,7 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
                  $m2 =$x +$index2;
                  $m3 =$x +$index3;
                  $m4 =$x +$index4;
-                  $m5 =$x +$index5;
+                 $m5 =$x +$index5;
                   
                  
                   
@@ -1880,7 +1900,23 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
 <!--    ////////////////////////////////////////////////-->
 <?php 
 
+ if( $id_dom[$y] == 16 ){
+       $limit4 = 45;
+    }
+    else if( $id_dom[$y] == 23  ){
+       $limit4 = 60;
 
+    }else if( $id_dom[$y] == 1009  ){
+       $limit4 = 44;
+
+    }
+    else if( $id_dom[$y] == 1010  ){
+       $limit4 = 65;
+
+    }
+    else{
+       $limit4 = 70;
+    }
 
     
     if( $nbr_linge > $limit4 && $nbr_linge <= 80 ){
@@ -1977,8 +2013,7 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
      }
 
 
-      //echo  "index premier colonne =";
-      //echo $index1;
+    
 
  
 ?>
@@ -2241,19 +2276,37 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
                   $stack3 = array();
                   $stack4 = array();
                   $stack5 = array();
-                   $te1 = array();
-                   $te2 = array();
-                   $te3 = array();
+                  
+                  $te1 = array();
+                  $te2 = array();
+
+                  $te3 = array();
+
                   $check1 = 0;
                   $check2 = 0;
                   $check3 =  0;
-                                  
+                   $check4 =  0;  
+                  
                   $test = array();
                   
                   //echo "nombre de domaine " .$y."=";
                   //echo $numbre_page;
                   
-                  array_push($n_page,$numbre_page); 
+                array_push($n_page,$numbre_page); 
+                  
+                array_push($stack," ");
+                array_push($stack2," ");
+                array_push($stack3," ");
+                array_push($stack4," ");
+                array_push($stack5," ");
+                
+                  
+                 array_push($stack7," ");
+                array_push($stack6," ");
+                array_push($stack8," ");
+                  
+                array_push($test," ");
+                  
                  }
                  
                  //echo $nrow;
@@ -2266,15 +2319,16 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
                  }
                   
                   */
-                 for($x = 1; $x < count($id_dom); $x++) {
-                     $i = $x+1;
+                 for($x = 1; $x < count($test); $x++) {
+                    // $i = $x+1;
+                    //echo $test[$x];
                      //echo "id de domaine " .$i."=";
                      //echo $id_domain[$x];
                    //  $conn = $pdo->query("UPDATE page (Id_domain,npage) VALUES ('".$id_domain[$x]."','".$n_page[$x]."' ) ");
                      
                      
                      
-     $conn = $pdo->query("UPDATE page set npage = '".$n_page[$x]."' WHERE Id_domain = '".$id_dom[$x]."'  ");
+     //$conn = $pdo->query("UPDATE page set npage = '".$n_page[$x]."' WHERE Id_domain = '".$id_dom[$x]."'  ");
 
                  }
                  
