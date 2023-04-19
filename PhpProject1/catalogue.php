@@ -1,6 +1,6 @@
 <?php
 //include('sommaire.php');
-include('con2.php');
+include('conn.php');
 ?>
 <html>
   <head>
@@ -63,9 +63,9 @@ table tr:nth-child(even) {
                  $nrowt =0;
                  $conntrt = $pdo->query("SELECT * FROM titre " );
                 $conntrt->setFetchMode(PDO::FETCH_CLASS, 'Titre');
-                
                 while($restrt = $conntrt->fetch()){
                  array_push($id_titre, $restrt->Id_titre);
+                 //echo $restrt->Id_titre;
                  $nrowt =$nrowt +1; 
                 }
                 $nrowt =$nrowt +1; 
@@ -73,13 +73,16 @@ table tr:nth-child(even) {
                 
                 
                 
-                for(  $y = 1;  $y < $nrowt;   $y++) {                 
+                for(  $y = 1;  $y < $nrowt;   $y++) {  
+                    
                 $connd = $pdo->query("SELECT * FROM domain  where Id_titre=  '".$id_titre[$y]."'" );
                 $connd->setFetchMode(PDO::FETCH_CLASS, 'Domain');
 
-               
+                //echo 'titre id =';
+                //echo $id_titre[$y];
+                //echo 'domaine';
                  while ($resd = $connd->fetch()){
-                   
+                     //echo $resd->Id_domain;
                      array_push($id_dom,$resd->Id_domain);
                     
                   $nrow = $nrow +1;
@@ -133,7 +136,7 @@ table tr:nth-child(even) {
                      "Grandes Serres.png","Domaine Saint Patrice.png","Domaine Orénia.png",
                      "Domaine La Soumade.png","Domaine Denuzière.png",
                      "Sauveroy.png","Les Souterrains.jpeg",
-                   "Marielle Michot.jpeg", "Maison Foucher.png", "Domaine Brana.png","Château de Poncié.png",
+                   "Marielle Michot.jpeg", "Maison Foucher.png", "Domaine Brana.png","Château de Poncié.png","Clos-louis.png"
                      
                     );
                  
@@ -173,7 +176,15 @@ table tr:nth-child(even) {
 
                 $conint = $pdo->query('SELECT * FROM introd where nbr_d ="'.$id_dom[$f].'"');
                 $conint->setFetchMode(PDO::FETCH_CLASS, 'Intro');
+                
                 $resint = $conint->fetch();
+                if($id_dom[$f]==1012){
+                //echo 'dom id';
+                
+                //echo $id_dom[$f];
+                //echo "resl";
+                //echo $rest;
+                }
                  if ($resd == false) {
                        array_push($stack7," ");
                 } else {
@@ -192,6 +203,10 @@ table tr:nth-child(even) {
                      array_push($stack8,htmlspecialchars($resint->intro));
                 }
                   }
+                 }
+                 
+                 for(  $f =0;  $f <  count($stack6);   $f++) {
+                    // echo $stack6[$f];
                  }
 
 
@@ -281,7 +296,7 @@ table tr:nth-child(even) {
                 array_push($n_page,0);
 
                // $suiv = $y +1;
-            for(  $y = 1;  $y <=  $nrow;   $y++) {
+            for(  $y = 1;  $y <=  $nrow ;   $y++) {
                 
                     
                     array_push($test,"NUll");
@@ -2274,6 +2289,8 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
 
  <?php
 
+ 
+        
 
                    $stack = array();
                   $stack2 = array();
@@ -2297,7 +2314,9 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
                   //echo $numbre_page;
                   
                 array_push($n_page,$numbre_page); 
-                  
+                  if ($id_dom[$y]== 1012){
+            //echo $numbre_page;
+        }
                 array_push($stack," ");
                 array_push($stack2," ");
                 array_push($stack3," ");
@@ -2323,16 +2342,15 @@ if($nbr_linge > $limit3  && $nbr_linge <= $limit4){
                  }
                   
                   */
-                 for($x = 1; $x < count($test); $x++) {
+                 for($x = 1; $x < count($n_page); $x++) {
                     // $i = $x+1;
                     //echo $test[$x];
                      //echo "id de domaine " .$i."=";
                      //echo $id_domain[$x];
-                   //  $conn = $pdo->query("UPDATE page (Id_domain,npage) VALUES ('".$id_domain[$x]."','".$n_page[$x]."' ) ");
+                  // $conn = $pdo->query("UPDATE page (Id_domain,npage) VALUES ('".$id_domain[$x]."','".$n_page[$x]."' ) ");
                      
-                     
-                     
-     //$conn = $pdo->query("UPDATE page set npage = '".$n_page[$x]."' WHERE Id_domain = '".$id_dom[$x]."'  ");
+                    
+    // $conn = $pdo->query("UPDATE page set npage = '".$n_page[$x]."' WHERE Id_domain = '".$id_dom[$x]."'  ");
 
                  }
                  
