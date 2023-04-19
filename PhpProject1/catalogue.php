@@ -763,7 +763,7 @@ if ($id_dom[$y] == 1002){
 
 <!-- //////////////////////////////////////////////////////:::::::::::-->
 <?php
- if( $nbr_linge > 45 ||$id_dom[$y] == 23 || $id_dom[$y] == 26  || $id_dom[$y] ==1009 || $id_dom[$y] ==1010 ){
+ if( $nbr_linge > 45 ||$id_dom[$y] == 23 || $id_dom[$y] == 26  || $id_dom[$y] ==1009 || $id_dom[$y] ==1010 || $id_dom[$y] ==1002 ){
     $index = $y + 300;
     $one = 1;
     $numbre_page = $numbre_page + 1;
@@ -1605,10 +1605,14 @@ if($nbr_linge > $taille_tab  && $nbr_linge <= $limit2){
     }else if($id_dom[$y] == 1009) {
          $limit3 = 37;
     }
-    elseif( $id_dom[$y] == 1002 ||$id_dom[$y] == 1010 ){
+    elseif( $id_dom[$y] == 1002  ){
+       $limit3 = 40;
+       
+    }
+    elseif( $id_dom[$y] == 1010 ){
        $limit3 = 44;
        
-    } else if($id_dom[$y] == 23) {
+    }else if($id_dom[$y] == 23) {
          $limit3 = 45;
     }
     else {
